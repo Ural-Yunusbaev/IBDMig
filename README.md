@@ -5,10 +5,10 @@ By Ural Yunusbaev 2018
 
 The IBDMig uses DUSH output IBD clusters to calculate the number of clusters including individuals of one ethnic origin and of different ethnic origin. It creates a table where rows are populations combinations and columns are cluster sizes. The table shows the counts of monoethnic and polyethnic clusters. This reflects admixture process in studying population. IBDMig calculates multi-IBD sharing between individuals of different ethnic origin. Thus it shows the haplotype contribution from one population to other. Furthermore the IBDMig estimates average length of haplotypes in each cluster size bins.
 
-To start type: 
+To start type: <br>
 ./ibdmig.py 22 ibdmig.list mapfile
 
-where:
+where:<br>
 22 - the number of chromosomes in according to DUSH output files (clust_1.hcl ... clust_22.hcl);
 ibdmig.list - the file containing a list of individuals with following columns: ind_id, population, phenotype;
 mapfile - the map/bim file with genetic distances (not mandatory).
@@ -16,41 +16,40 @@ mapfile - the map/bim file with genetic distances (not mandatory).
 Input files examples:
 ibdmig.list - the list of individuals with following tab delimeted columns: ind_id, population, phenotype
 head ibdmig.list<br>
-10BO	pop1	1<p>
-103B	pop1	1
-9i	pop1	2
-88N	pop1	2
-9RE	pop2	1
-98RE	pop2	1
-103A	pop3	2
-102N	pop3	2
-101N	pop3	2
-100N	pop3	2
+10BO	pop1	1<br>
+103B	pop1	1<br>
+9i	pop1	2<br>
+88N	pop1	2<br>
+9RE	pop2	1<br>
+98RE	pop2	1<br>
+103A	pop3	2<br>
+102N	pop3	2<br>
+101N	pop3	2<br>
+100N	pop3	2<br>
 
-* - columns are folowing: individual ID, population, phenotype.
+* - columns are folowing: individual ID, population, phenotype.<br>
 **- maximum number of different populations is 7.
 
 
-head -n 3 clust_1.hcl
-c1	16504399	17593685	19N 19N.0	19N 19N.0	182A 182A.0	182A 182A.0	66i 66i.1	66i 66i.1	153A 153A.1	153A 153A.1
-c2	16504399	17799529	62BB 62BB.0	62BB 62BB.0	55k 55k.0	55k 55k.0	190k 190k.0	190k 190k.0	51A 51A.1	51A 51A.1
-c3	16504399	17823261	164B 164B.0	164B 164B.0	38BO 38BO.1	38BO 38BO.1	36i 36i.1	36i 36i.1	100k 100k.1	100k 100k.1
+head -n 3 clust_1.hcl<br>
+c1	16504399	17593685	19N 19N.0	19N 19N.0	182A 182A.0	182A 182A.0	66i 66i.1	66i 66i.1	153A 153A.1	153A 153A.1<br>
+c2	16504399	17799529	62BB 62BB.0	62BB 62BB.0	55k 55k.0	55k 55k.0	190k 190k.0	190k 190k.0	51A 51A.1	51A 51A.1<br>
+c3	16504399	17823261	164B 164B.0	164B 164B.0	38BO 38BO.1	38BO 38BO.1	36i 36i.1	36i 36i.1	100k 100k.1	100k 100k.1<br>
 
 * - for details see http://www1.cs.columbia.edu/~gusev/dash/
 
 
-head -n 3 mapfile.bim
-1       rs3094315       0.48877594      752566  G       A
-1       rs12562034      0.49571378      768448  A       G
-1       rs12124819      0.49944228      776546  G       A
-
+head -n 3 mapfile.bim<br>
+1       rs3094315       0.48877594      752566  G       A<br>
+1       rs12562034      0.49571378      768448  A       G<br>
+1       rs12124819      0.49944228      776546  G       A<br>
 * - for details see http://zzz.bwh.harvard.edu/plink/data.shtml#map
 
 
-Output files are following:
-ibdmig.out.affected
-ibdmig.out.proportion
-ibdmig.out.total
+Output files are following:<br>
+ibdmig.out.affected<br>
+ibdmig.out.proportion<br>
+ibdmig.out.total<br>
 
 Output files examples:
 
@@ -86,20 +85,20 @@ CHR	CLASTER	START	END	SIZE	AFFECT	Pop1	Pop2	Pop3
 1	c2	165043	177995	6	2	4	0	2
 1	c3	165043	178232	4	1	2	0	2
 
-* - columns are folowing:
-Chromosome number
-Cluster identifier
-Cluster start position
-Cluster end position
-Cluster size
-The number of affected individuals
-The number of individuals from Pop1
-The number of individuals from Pop2
-The number of individuals from Pop3
+* - columns are folowing:<br>
+Chromosome number<br>
+Cluster identifier<br>
+Cluster start position<br>
+Cluster end position<br>
+Cluster size<br>
+The number of affected individuals<br>
+The number of individuals from Pop1<br>
+The number of individuals from Pop2<br>
+The number of individuals from Pop3<br>
 
-cat ibdmig.out.total.end
-CHR	CLASTER	START	END	SIZE	AFFECT	Bas	Rus	Tat
-max	-	-	-	6	4	4	3	2
-min	-	-	-	4	1	1	0	0
-mean	-	-	-	5	2	2	1	1
+cat ibdmig.out.total.end<br>
+CHR	CLASTER	START	END	SIZE	AFFECT	Bas	Rus	Tat<br>
+max	-	-	-	6	4	4	3	2<br>
+min	-	-	-	4	1	1	0	0<br>
+mean	-	-	-	5	2	2	1	1<br>
 
