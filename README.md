@@ -15,8 +15,8 @@ mapfile - the map/bim file with genetic distances (not mandatory).
 
 Input files examples:
 ibdmig.list - the list of individuals with following tab delimeted columns: ind_id, population, phenotype
-head ibdmig.list
-10BO	pop1	1
+head ibdmig.list<br>
+10BO	pop1	1<p>
 103B	pop1	1
 9i	pop1	2
 88N	pop1	2
