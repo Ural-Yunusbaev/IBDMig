@@ -9,12 +9,12 @@ To start type: <br>
 ./ibdmig.py 22 ibdmig.list mapfile
 
 where:<br>
-22 - the number of chromosomes in according to DUSH output files (clust_1.hcl ... clust_22.hcl);
-ibdmig.list - the file containing a list of individuals with following columns: ind_id, population, phenotype;
-mapfile - the map/bim file with genetic distances (not mandatory).
+22 - the number of chromosomes in according to DUSH output files (clust_1.hcl ... clust_22.hcl);<br>
+ibdmig.list - the file containing a list of individuals with following columns: ind_id, population, phenotype;<br>
+mapfile - the map/bim file with genetic distances (not mandatory).<br>
 
-Input files examples:
-ibdmig.list - the list of individuals with following tab delimeted columns: ind_id, population, phenotype
+Input files examples:<br>
+ibdmig.list - the list of individuals with following tab delimeted columns: ind_id, population, phenotype<br>
 head ibdmig.list<br>
 10BO	pop1	1<br>
 103B	pop1	1<br>
@@ -53,37 +53,37 @@ ibdmig.out.total<br>
 
 Output files examples:
 
-cat ibdmig.out.proportion
-POPS	4	5	6	7	8	9	10	11	15	16	TOTAL
-100	1	1	0	0	0	0	0	0	0	0	2
-010	1	1	1	0	0	0	0	0	0	0	3
-001	1	0	0	0	0	0	0	0	0	0	1
-110	1	1	1	0	0	0	0	0	0	0	3
-101	1	1	1	0	0	0	0	0	0	0	3
-011	1	1	1	0	1	0	0	0	0	0	4
-111	1	1	1	1	1	1	1	1	1	1	10
+cat ibdmig.out.proportion<br>
+POPS	4	5	6	7	8	9	10	11	15	16	TOTAL<br>
+100	1	1	0	0	0	0	0	0	0	0	2<br>
+010	1	1	1	0	0	0	0	0	0	0	3<br>
+001	1	0	0	0	0	0	0	0	0	0	1<br>
+110	1	1	1	0	0	0	0	0	0	0	3<br>
+101	1	1	1	0	0	0	0	0	0	0	3<br>
+011	1	1	1	0	1	0	0	0	0	0	4<br>
+111	1	1	1	1	1	1	1	1	1	1	10<br>
 
-* The header of ibdmig_proportion.out is following: 
-POPS - variants of population combinations;
-4-16 - sizes of IBD clusters;
-TOTAL - total number for row
-** populations combinations in column 1 presented in the file ibdmig.out.proportion.header.
+* The header of ibdmig_proportion.out is following: <br>
+POPS - variants of population combinations;<br>
+4-16 - sizes of IBD clusters;<br>
+TOTAL - total number for row<br>
+** populations combinations in column 1 presented in the file ibdmig.out.proportion.header.<br>
 
-cat ibdmig.out.proportion.header
-100	pop1
-010	pop2
-001	pop3
-110	pop1_pop2
-101	pop1_pop3
-011	pop2_pop3
-111	pop1_pop2_pop3
+cat ibdmig.out.proportion.header<br>
+100	pop1<br>
+010	pop2<br>
+001	pop3<br>
+110	pop1_pop2<br>
+101	pop1_pop3<br>
+011	pop2_pop3<br>
+111	pop1_pop2_pop3<br>
 
 
-head -n 4 ibdmig.out.total
-CHR	CLASTER	START	END	SIZE	AFFECT	Pop1	Pop2	Pop3
-1	c1	165043	175936	4	4	1	3	0
-1	c2	165043	177995	6	2	4	0	2
-1	c3	165043	178232	4	1	2	0	2
+head -n 4 ibdmig.out.total<br>
+CHR	CLASTER	START	END	SIZE	AFFECT	Pop1	Pop2	Pop3<br>
+1	c1	165043	175936	4	4	1	3	0<br>
+1	c2	165043	177995	6	2	4	0	2<br>
+1	c3	165043	178232	4	1	2	0	2<br>
 
 * - columns are folowing:<br>
 Chromosome number<br>
