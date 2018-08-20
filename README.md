@@ -94,7 +94,7 @@ cat ibdmig.out.proportion.header
 
 <pre>
 head -n 4 ibdmig.out.total
-CHR	CLASTER	START	END	SIZE	AFFECT	Pop1	Pop2	Pop3
+CHR	CLUSTER	START	END	SIZE	AFFECT	Pop1	Pop2	Pop3
 1	c1	165043	175936	4	4	1	3	0
 1	c2	165043	177995	6	2	4	0	2
 1	c3	165043	178232	4	1	2	0	2
@@ -112,7 +112,7 @@ The number of individuals from Pop3<br>
 
 <pre>
 cat ibdmig.out.total.end<br>
-CHR	CLASTER	START	END	SIZE	AFFECT	Bas	Rus	Tat
+CHR	CLUSTER	START	END	SIZE	AFFECT	Bas	Rus	Tat
 max	-	-	-	6	4	4	3	2
 min	-	-	-	4	1	1	0	0
 mean	-	-	-	5	2	2	1	1
