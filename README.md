@@ -13,7 +13,6 @@ ibdmig.list - the file containing a list of individuals with following columns: 
 mapfile - the map/bim file with genetic distances (not mandatory).<br>
 
 <pre>
-cat ibdmig.out.cluster_counts
 POPS	3	4	5	6	7	8	9	10	11	12	13	14	15	16	17	20	TOTAL
 100	0	2958	870	227	91	38	13	7	3	0	0	1	0	0	0	0	4208
 010	0	3697	829	224	66	18	12	3	0	0	0	0	0	0	0	0	4849
@@ -22,6 +21,7 @@ POPS	3	4	5	6	7	8	9	10	11	12	13	14	15	16	17	20	TOTAL
 101	1	11207	4096	1646	853	396	212	104	33	25	14	4	0	1	0	0	18592
 011	0	15982	5757	2344	1190	472	273	108	29	11	6	2	1	0	0	0	26175
 111	0	15367	8784	5327	3640	2042	1342	745	346	158	74	39	11	2	1	1	37879
+</pre>
 
 <pre>
 cat ibdmig.out.cluster_length
