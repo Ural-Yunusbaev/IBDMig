@@ -13,6 +13,17 @@ where:<br>
 ibdmig.list - the file containing a list of individuals with following columns: ind_id, population, phenotype;<br>
 mapfile - the map/bim file with genetic distances (not mandatory).<br>
 
+<pre>
+POPS	4	5	6	7	8	9	10	11	12	13	14	15	16	17	20	TOTAL
+Bas	2958	870	227	91	38	13	7	3	0	0	1	0	0	0	0	4208
+Rus	3697	829	224	66	18	12	3	0	0	0	0	0	0	0	0	4849
+Tat	1593	282	54	14	2	1	0	0	0	0	0	0	0	0	0	1946
+Bas_Rus	6627	2002	767	357	128	58	17	5	1	0	0	0	0	0	0	9962
+Bas_Tat	11207	4096	1646	853	396	212	104	33	25	14	4	0	1	0	0	18591
+Rus_Tat	15982	5757	2344	1190	472	273	108	29	11	6	2	1	0	0	0	26175
+Bas_Rus_Tat	15367	8784	5327	3640	2042	1342	745	346	158	74	39	11	2	1	1	37879
+TOTAL	57431	22620	10589	6211	3096	1911	984	416	195	94	46	12	3	1	1	103610
+</pre>
 Input files examples:<br>
 ibdmig.list - the list of individuals with following tab delimeted columns: ind_id, population, phenotype<br>
 head ibdmig.list<br>
