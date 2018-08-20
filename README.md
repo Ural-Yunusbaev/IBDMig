@@ -9,7 +9,7 @@ ibdmig.out.cluster_length - average length of haplotypes in each population and 
 The output files are tables where rows are populations combinations and columns are cluster sizes.<br>
 IBDMig assesses IBD sharing between individuals of different ethnic origin. Thus it shows the haplotype contribution from one population to other.
 
-To start type:
+To start IBDMig type:
 <pre>./ibdmig.py 22 ibdmig.list mapfile</pre>
 where:<br>
 22 - the number of chromosomes in according to DUSH output files (clust_1.hcl ... clust_22.hcl);<br>
@@ -30,7 +30,7 @@ POPS	3	4	5	6	7	8	9	10	11	12	13	14	15	16	17	20	TOTAL
 </pre>
 The header of ibdmig.out.cluster_counts is following: <br>
 POPS - variants of population combinations;<br>
-4-16 - sizes of IBD clusters;<br>
+4-20 - sizes of clusters;<br>
 TOTAL - total number for row<br>
 Populations combinations in column 1 presented in the file ibdmig.out.cluster_header.<br>
 
@@ -48,7 +48,6 @@ POPS	4	5	6	7	8	9	10	11	12	13	14	15	16	17	20	TOTAL
 
 Input files examples:<br>
 ibdmig.list - the list of individuals with following tab delimeted columns: ind_id, population, phenotype<br>
-
 <pre>
 head ibdmig.list
 10BO	pop1	1
@@ -62,7 +61,6 @@ head ibdmig.list
 101N	pop3	2
 100N	pop3	2
 </pre>
-Columns are folowing: individual ID, population, phenotype.<br>
 Maximum number of source populations is 7.
 
 <pre>
@@ -84,22 +82,22 @@ For details see http://zzz.bwh.harvard.edu/plink/data.shtml#map
 Additional output files:
 
 <pre>
-cat ibdmig.out.proportion.header<br>
-100	pop1<br>
-010	pop2<br>
-001	pop3<br>
-110	pop1_pop2<br>
-101	pop1_pop3<br>
-011	pop2_pop3<br>
-111	pop1_pop2_pop3<br>
+cat ibdmig.out.proportion.header
+100	pop1
+010	pop2
+001	pop3
+110	pop1_pop2
+101	pop1_pop3
+011	pop2_pop3
+111	pop1_pop2_pop3
 </pre>
 
 <pre>
-head -n 4 ibdmig.out.total<br>
-CHR	CLASTER	START	END	SIZE	AFFECT	Pop1	Pop2	Pop3<br>
-1	c1	165043	175936	4	4	1	3	0<br>
-1	c2	165043	177995	6	2	4	0	2<br>
-1	c3	165043	178232	4	1	2	0	2<br>
+head -n 4 ibdmig.out.total
+CHR	CLASTER	START	END	SIZE	AFFECT	Pop1	Pop2	Pop3
+1	c1	165043	175936	4	4	1	3	0
+1	c2	165043	177995	6	2	4	0	2
+1	c3	165043	178232	4	1	2	0	2
 </pre>
 Columns are folowing:<br>
 Chromosome number<br>
@@ -114,8 +112,8 @@ The number of individuals from Pop3<br>
 
 <pre>
 cat ibdmig.out.total.end<br>
-CHR	CLASTER	START	END	SIZE	AFFECT	Bas	Rus	Tat<br>
-max	-	-	-	6	4	4	3	2<br>
-min	-	-	-	4	1	1	0	0<br>
-mean	-	-	-	5	2	2	1	1<br>
+CHR	CLASTER	START	END	SIZE	AFFECT	Bas	Rus	Tat
+max	-	-	-	6	4	4	3	2
+min	-	-	-	4	1	1	0	0
+mean	-	-	-	5	2	2	1	1
 </pre>
