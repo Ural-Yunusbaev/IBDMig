@@ -5,9 +5,10 @@ By Ural Yunusbaev 2018
 
 The IBDMig uses DUSH output IBD clusters to calculate the number of clusters including individuals of one ethnic origin and of different ethnic origin. It creates a table where rows are populations combinations and columns are cluster sizes. The table shows the counts of monoethnic and polyethnic clusters. This reflects admixture process in studying population. IBDMig calculates multi-IBD sharing between individuals of different ethnic origin. Thus it shows the haplotype contribution from one population to other. Furthermore the IBDMig estimates average length of haplotypes in each cluster size bins.
 
-To start type: <br>
+To start type:
+<pre>
 ./ibdmig.py 22 ibdmig.list mapfile
-
+</pre>
 where:<br>
 22 - the number of chromosomes in according to DUSH output files (clust_1.hcl ... clust_22.hcl);<br>
 ibdmig.list - the file containing a list of individuals with following columns: ind_id, population, phenotype;<br>
@@ -43,13 +44,13 @@ head ibdmig.list
 **- maximum number of different populations is 7.
 </pre>
 
-head -n 3 clust_1.hcl<br>
-c1	16504399	17593685	19N 19N.0	19N 19N.0	182A 182A.0	182A 182A.0	66i 66i.1	66i 66i.1	153A 153A.1	153A 153A.1<br>
-c2	16504399	17799529	62BB 62BB.0	62BB 62BB.0	55k 55k.0	55k 55k.0	190k 190k.0	190k 190k.0	51A 51A.1	51A 51A.1<br>
-c3	16504399	17823261	164B 164B.0	164B 164B.0	38BO 38BO.1	38BO 38BO.1	36i 36i.1	36i 36i.1	100k 100k.1	100k 100k.1<br>
-
+<pre>
+head -n 3 clust_1.hcl
+c1	16504399	17593685	19N 19N.0	19N 19N.0	182A 182A.0	182A 182A.0	66i 66i.1	66i 66i.1	153A 153A.1	153A 153A.1
+c2	16504399	17799529	62BB 62BB.0	62BB 62BB.0	55k 55k.0	55k 55k.0	190k 190k.0	190k 190k.0	51A 51A.1	51A 51A.1
+c3	16504399	17823261	164B 164B.0	164B 164B.0	38BO 38BO.1	38BO 38BO.1	36i 36i.1	36i 36i.1	100k 100k.1	100k 100k.1
 * - for details see http://www1.cs.columbia.edu/~gusev/dash/
-
+</pre>
 
 head -n 3 mapfile.bim<br>
 1       rs3094315       0.48877594      752566  G       A<br>
