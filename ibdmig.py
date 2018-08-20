@@ -21,22 +21,28 @@ from datetime import datetime
 
 file_hcl  = "Missing file_hcl"
 file_list = "Missing file_list"
+file_map  = "Missing file_map"
 poly_threshold = "Missing polyethnic cluster threshold"
 mono_threshold = "Missing monoethnic cluster threshold"
-file_map = "Missing file_map"
 
 
 if   sys.argv[1:]: file_hcl  = sys.argv[1]
 if   sys.argv[2:]: file_list = sys.argv[2]
-if   sys.argv[3:]: poly_threshold  = sys.argv[3]
-if   sys.argv[4:]: mono_threshold  = sys.argv[4]
-if   sys.argv[5:]: file_map  = sys.argv[5]
-if file_hcl == "Missing file_hcl" or file_list == "Missing file_list" or poly_threshold == "Missing polyethnic cluster threshold" or mono_threshold == "Missing monoethnic cluster threshold":
+if   sys.argv[3:]: file_map  = sys.argv[3]
+if   sys.argv[4:]: poly_threshold  = sys.argv[4]
+if   sys.argv[5:]: mono_threshold  = sys.argv[5]
+if file_hcl == "Missing file_hcl" or file_list == "Missing file_list":
 	print ("Missing command line argument.")
-	sys.exit("To start type: ./ibdmig.py 22 ibdmig.list 9 6\nwhere:\n22 - the number of chromosomes in acording to DUSH output files (clust_1.hcl ... clust_22.hcl)\nibdmig.list - the file containing a list of individuals with following columns: ind_id, population, phenotype\n9  - the size threshold for affected polyethnic cluster\n6  - the size threshold for affected monoethnic cluster\nRead more in ibdmig.readme")
+	sys.exit("To start type: ./ibdmig.py 22 ibdmig.list\nwhere:\n22 - the number of chromosomes in acording to DUSH output files (clust_1.hcl ... clust_22.hcl)\nibdmig.list - the file containing a list of individuals with following columns: ind_id, population, phenotype\nmapfile - the map/bim file with genetic distances (not mandatory)\n9  - the size threshold for affected polyethnic cluster (not mandatory, 9 if not defined)\n6  - the size threshold for affected monoethnic cluster (not mandatory, 6 if not defined)\nRead more in ibdmig.readme")
 
 if file_map == "Missing file_map":
 	print ("Missing file_map argument in command line. Genetic distances in output will be 0.")
+if poly_threshold == "Missing polyethnic cluster threshold" or mono_threshold == "Missing monoethnic cluster threshold":
+	print ("Missing cluster threshold. Following defaults will be used: 9 for affected polyethnic clusters, 6 for affected monoethnic")
+	poly_threshold = "9"
+	mono_threshold = "6"
+
+
 
 work_dir = os.getcwd()
 log_file = 'Program           :  ibdmig.py\nAuthor            :  Copyright (C) 2018 Ural Yunusbaev\nStart Time        :  ' + datetime.now().strftime('%Y-%m-%d %H:%M:%S') + '\nWork Directory    :  ' + work_dir + '\n\nParameters\n  chromosomes     :  ' + file_hcl       + '\n' + '  individuals list:  ' + file_list      + '\n' + '  poly  threshold :  ' + poly_threshold + '\n' + '  mono  threshold :  ' + mono_threshold + '\n' + '  genetic distances loaded from :  ' + file_map + '\n\n'
@@ -157,7 +163,7 @@ for ch in range(1, int(file_hcl)+1):
 	ChromosomesNumber += 1
 
 
-log_file = log_file + ("Totaly " + str(ClustersNumberTotal) + " clusters loaded from " + str(ChromosomesNumber) + " chromosomes. \n")
+log_file = log_file + ("Totally " + str(ClustersNumberTotal) + " clusters loaded for " + str(ChromosomesNumber) + " chromosomes. \n")
 with open("ibdmig.out.log", "a") as f: f.write(log_file)
 print (log_file)
 
@@ -224,28 +230,13 @@ for clst in range(len(clusters)):
 
 	if ClstSizePatients >= int(poly_threshold) and ClstSizePatients == ClstSize: OutputTable2.append(OutputRow)
 
-TableHeader = ['CHR', 'CLASTER', 'START', 'END', 'SIZE', 'AFFECT']
+TableHeader = ['CHR', 'CLUSTER', 'START', 'END', 'SIZE', 'AFFECT']
 for k in range(len(UniqPopList)): TableHeader.append(str(list(UniqPopList)[k]))
 
-####################################################################
-#                                                                  #
-# Saving the ibdmig.out.total file                                 #
-#                                                                  #
-####################################################################
-
-with open("ibdmig.out.total","w") as f:
-	f.write( '\t'.join(TableHeader) )
-	f.write( '\n' )
-	wr = csv.writer(f, delimiter="\t")
-	wr.writerows(OutputTable)
-
-log_file = ("\n" + str(len(OutputTable)) + " clusters analysed and saved to ibdmig.out.total\n")
-with open("ibdmig.out.log", "a") as f: f.write(log_file)
-print (log_file)
 
 ####################################################################
 #                                                                  #
-# Saving the ibdmig.out.total.gdist file                           #
+# Saving the ibdmig.out.cluster_list file                           #
 #                                                                  #
 ####################################################################
 
@@ -255,72 +246,21 @@ TableHeaderGdist.append('START_cM')
 TableHeaderGdist.append('END_cM')
 #print (TableHeaderGdist)
 
-with open("ibdmig.out.total.gdist","w") as f:
+with open("ibdmig.out.cluster_list","w") as f:
 	f.write( '\t'.join(TableHeaderGdist) )
 	f.write( '\n' )
 	wr = csv.writer(f, delimiter="\t")
 	wr.writerows(OutputTableGdist)
 
-log_file = ("\n" + str(len(OutputTableGdist)) + " clusters analysed and saved to ibdmig.out.total.gdist\n")
-with open("ibdmig.out.log", "a") as f: f.write(log_file)
-print (log_file)
-
-
-####################################################################
-#                                                                  #
-# The ibdmig.out.total.end file                                    #
-#                                                                  #
-####################################################################
-
-MaxClusterSize  = max([int(x[4]) for x in OutputTable])
-MinClusterSize  = min([int(x[4]) for x in OutputTable])
-MeanClusterSize = round((sum([int(x[4]) for x in OutputTable]) / len([int(x[4]) for x in OutputTable])), 1)
-
-TotalEnd = []
-TotalEndmax = []
-TotalEndmin = []
-TotalEndmean = []
-
-for col in range(len(TableHeader)):
-	if col > 3: 
-		TotalEndmax.append(max([int(x[col]) for x in OutputTable]))
-		TotalEndmin.append(min([int(x[col]) for x in OutputTable]))
-		TotalEndmean.append(round((sum([int(x[col]) for x in OutputTable]) / len([int(x[col]) for x in OutputTable])), 1))
-	elif col == 0: 
-		TotalEndmax.append('max')
-		TotalEndmin.append('min')
-		TotalEndmean.append('mean')
-	else: 
-		TotalEndmax.append('-')
-		TotalEndmin.append('-')
-		TotalEndmean.append('-')
-TotalEnd.append(TotalEndmax)
-TotalEnd.append(TotalEndmin)
-TotalEnd.append(TotalEndmean)
-
-
-####################################################################
-#                                                                  #
-# Saving the ibdmig.out.total.end file                             #
-#                                                                  #
-####################################################################
-
-with open("ibdmig.out.total.end","w") as f:
-	f.write( '\t'.join(TableHeader) )
-	f.write( '\n' )
-	wr = csv.writer(f, delimiter="\t")
-	wr.writerows(TotalEnd)
-
-log_file = ("Common statistics of clusters analysis saved to ibdmig.out.total.end\n")
+log_file = ("\n" + str(len(OutputTableGdist)) + " clusters analysed and saved to ibdmig.out.cluster_list\n")
 with open("ibdmig.out.log", "a") as f: f.write(log_file)
 print (log_file)
 
 
 
-
 ####################################################################
 #                                                                  #
-# The ibdmig.out.total.gdist.end file                              #
+# The ibdmig.out.cluster_list.end file                             #
 #                                                                  #
 ####################################################################
 
@@ -353,39 +293,17 @@ TotalEnd.append(TotalEndmean)
 
 ####################################################################
 #                                                                  #
-# Saving the ibdmig.out.total.gdist.end file                       #
+# Saving the ibdmig.out.cluster_list.end file                      #
 #                                                                  #
 ####################################################################
 
-with open("ibdmig.out.total.gdist.end","w") as f:
+with open("ibdmig.out.cluster_list.end","w") as f:
 	f.write( '\t'.join(TableHeaderGdist) )
 	f.write( '\n' )
 	wr = csv.writer(f, delimiter="\t")
 	wr.writerows(TotalEnd)
 
-log_file = ("Common statistics of clusters analysis saved to ibdmig.out.total.gdist.end\n")
-with open("ibdmig.out.log", "a") as f: f.write(log_file)
-print (log_file)
-
-
-
-
-
-####################################################################
-#                                                                  #
-# Saving the ibdmig.out.affected file                              #
-#                                                                  #
-####################################################################
-
-
-
-with open("ibdmig.out.affected","w") as f:
-	f.write( '\t'.join(TableHeader) )
-	f.write( '\n' )
-	wr = csv.writer(f, delimiter="\t")
-	wr.writerows(OutputTable2)
-
-log_file = (str(len(OutputTable2)) + " clusters passed the threshold saved to ibdmig.out.affected.\n")
+log_file = ("Common statistics of clusters analysis saved to ibdmig.out.cluster_list.end\n")
 with open("ibdmig.out.log", "a") as f: f.write(log_file)
 print (log_file)
 
@@ -456,7 +374,7 @@ PopCombinations = list(PopCombinations1)
 
 ####################################################################
 #                                                                  #
-# Getting the ibdmig.out.proportion [PopCombinationsTable]         #
+# Getting the ibdmig.out.cluster_counts [PopCombinationsTable]     #
 #                                                                  #
 ####################################################################
 
@@ -475,20 +393,13 @@ for x in PopCombinationsTable:
 	PopCombinationsTableInd.append(x[0])
 
 PopCombinationsTableGdist = list(PopCombinationsTable)
-#print ("PopCombinationsTable")
-#print (PopCombinationsTable)
+
 
 ####################################################################
 #                                                                  #
-# Fullihg the ibdmig.out.proportion [PopCombinationsTable]         #
+# Fullihg the ibdmig.out.cluster_counts [PopCombinationsTable]     #
 #                                                                  #
 ####################################################################
-
-#print ("OutputTable")
-#print (OutputTable)
-#print ("OutputTableGdist")
-#print (OutputTableGdist)
-
 
 for x in OutputTable:
 	ClstSize = x[4]
@@ -501,16 +412,6 @@ for x in OutputTable:
 	string2 = string1 + ClstSize
 	index1 = (PopCombinationsTableInd.index(string2))
 	PopCombinationsTable[index1][3] = PopCombinationsTable[index1][3] + 1
-
-#print("PopCombinations")
-#print(PopCombinations)
-#print("OutputTable3")
-#print(OutputTable3)
-#print("PopCombinationsTableInd")
-#print(PopCombinationsTableInd)
-#print("PopCombinationsTable")
-#print(PopCombinationsTable)
-
 
 	
 OutputTable40 = []
@@ -542,26 +443,26 @@ OutputTable40head.append('TOTAL')
 
 ####################################################################
 #                                                                  #
-# Saving the ibdmig.out.proportion file                            #
+# Saving the ibdmig.out.cluster_counts file                            #
 #                                                                  #
 ####################################################################
 
-with open("ibdmig.out.proportion","w") as f:
+with open("ibdmig.out.cluster_counts","w") as f:
 	f.write( '\t'.join(OutputTable40head) )
 	f.write( '\n' )
 	wr = csv.writer(f, delimiter="\t")
 	wr.writerows(OutputTable40)
 
-log_file = (str(len(OutputTable40)) + " variants of population combinations saved to ibdmig.out.proportion.\n")
+log_file = (str(len(OutputTable40)) + " variants of population combinations saved to ibdmig.out.cluster_counts.\n")
 with open("ibdmig.out.log", "a") as f: f.write(log_file)
 print (log_file)
 
-####################################################################
-#                                                                  #
-# Getting the ibdmig.out.proportion.header [CombPopNameTableOut]   #
-#                                                                  #
-####################################################################
 
+####################################################################
+#                                                                  #
+# Getting the ibdmig.out.cluster_header [CombPopNameTableOut]       #
+#                                                                  #
+####################################################################
 
 CombPopNameTableOut = []
 for x in range(len(PopCombinations)):
@@ -569,38 +470,29 @@ for x in range(len(PopCombinations)):
 	CombPopNameTableOutRow.append((PopCombinations[x]))
 	CombPopNameTableOutRow.append(('_'.join(CombPopNameTable[x])))
 	CombPopNameTableOut.append(CombPopNameTableOutRow)
-#print ('CombPopNameTableOut')
-#print (CombPopNameTableOut)
 
 ####################################################################
 #                                                                  #
-# Saving the ibdmig.out.proportion.header file                     #
+# Saving the ibdmig.out.cluster_header file                         #
 #                                                                  #
 ####################################################################
 
-with open("ibdmig.out.proportion.header","w") as f:
+with open("ibdmig.out.cluster_header","w") as f:
 	wr = csv.writer(f, delimiter="\t")
 	wr.writerows(CombPopNameTableOut)
 
-log_file = ("Variants of population combinations with population names saved to ibdmig.out.proportion.header.\n")
+log_file = ("Variants of population combinations with population names saved to ibdmig.out.cluster_header.\n")
 with open("ibdmig.out.log", "a") as f: f.write(log_file)
 print (log_file)
 
 
-
-
-
 ######################################################################
 #                                                                    #
-# Fullihg the ibdmig.out.proportion.gdist [PopCombinationsTableGdist]#
+# Fullihg the ibdmig.out.cluster_length [PopCombinationsTableGdist]  #
 #                                                                    #
 ######################################################################
-
-#print ("OutputTableGdist")
-#print (OutputTableGdist)
 
 row_len = 6 + len(UniqPopList)
-#print ("row_len" + str(row_len))
 
 for x in OutputTableGdist:
 	ClstSize = x[4]
@@ -615,10 +507,6 @@ for x in OutputTableGdist:
 	index1 = (PopCombinationsTableInd.index(string2))
 	PopCombinationsTableGdist[index1][3] = PopCombinationsTableGdist[index1][3] + ClstLength
 
-#print("PopCombinationsTableGdist")
-#print(PopCombinationsTableGdist)
-
-
 OutputTable4  = []	
 OutputTable40Gdist = []
 for x in PopCombinations:
@@ -629,61 +517,56 @@ for x in PopCombinations:
 		string2 = str(x) + str(y)
 		index1 = (PopCombinationsTableInd.index(string2))
 		string2 = PopCombinationsTableGdist[index1][3]
-		#print("string2 = " + str(string2))
 		string2total_for_row = string2total_for_row + string2
 		OutputTable4.append(str(string2))
 	OutputTable4.append(str(string2total_for_row))
-	#print("string2total_for_row")
-	#print(str(string2total_for_row))
 	OutputTable40Gdist.append(OutputTable4)
-	#print("OutputTable4")
-	#print(OutputTable4)
-
-#print("OutputTable40Gdist")
-#print(OutputTable40Gdist)
-
 
 OutputTable50Gdist = []
 
 for x in range(len(OutputTable40Gdist)):
 	OutputRow50Gdist = []
-	#print (OutputTable40Gdist[x])
-	#print (OutputTable40[x])
 	for y in range(len(OutputTable40Gdist[x])):
-		#print ("y=" + str(y))
-		#print (OutputTable40Gdist[x][y])
-		#print (OutputTable40[x][y])
 		if y > 0 and int(OutputTable40[x][y]) > 0 :
 			z = Decimal(OutputTable40Gdist[x][y]) / int(OutputTable40[x][y])
 		else:
 			z = OutputTable40Gdist[x][y]
-		#print (z)
 		OutputRow50Gdist.append(str(z))
 	OutputTable50Gdist.append(OutputRow50Gdist)
 
-#print("OutputTable50Gdist")
-#print(OutputTable50Gdist)
-
 
 ####################################################################
 #                                                                  #
-# Saving the ibdmig.out.proportion.gdist file                      #
+# Saving the ibdmig.out.cluster_length file                      #
 #                                                                  #
 ####################################################################
 
-with open("ibdmig.out.proportion.gdist","w") as f:
+with open("ibdmig.out.cluster_length","w") as f:
 	f.write( '\t'.join(OutputTable40head) )
 	f.write( '\n' )
 	wr = csv.writer(f, delimiter="\t")
 	wr.writerows(OutputTable50Gdist)
 
-log_file = (str(len(OutputTable50Gdist)) + " variants of population combinations saved to ibdmig.out.proportion.gdist.\n")
+log_file = (str(len(OutputTable50Gdist)) + " variants of population combinations saved to ibdmig.out.cluster_length.\n")
 with open("ibdmig.out.log", "a") as f: f.write(log_file)
 print (log_file)
 
 
+####################################################################
+#                                                                  #
+# Saving the ibdmig.out.affected_clusters file                     #
+#                                                                  #
+####################################################################
 
+with open("ibdmig.out.affected_clusters","w") as f:
+	f.write( '\t'.join(TableHeader) )
+	f.write( '\n' )
+	wr = csv.writer(f, delimiter="\t")
+	wr.writerows(OutputTable2)
 
+log_file = (str(len(OutputTable2)) + " affected clusters passed the threshold saved to ibdmig.out.affected_clusters.\n")
+with open("ibdmig.out.log", "a") as f: f.write(log_file)
+print (log_file)
 
 
 ####################################################################
@@ -781,8 +664,6 @@ if len(OutputTable2) > 0:
 				if int(x) > 0: Str = "1"
 				ClstStrRowPopsStr = ClstStrRowPopsStr + Str
 			xxx += 1
-		#print ( "ClstStrRowPopsStr = " + str(ClstStrRowPopsStr) )
-
 
 		ClstStrRowsPopCompositionMatch = []
 		for yy in ClstStrRowsTotal:
@@ -797,9 +678,6 @@ if len(OutputTable2) > 0:
 			if ClstStrRowPopsStr1 == ClstStrRowPopsStr: 
 				ClstStrRowsPopCompositionMatch.append(yy)
 
-		#print ( "ClstStrRowsPopCompositionMatch = " + str(ClstStrRowsPopCompositionMatch) )
-		#print ( "len(ClstStrRowsPopCompositionMatch) = " + str(len(ClstStrRowsPopCompositionMatch)) )
-
 
 		Clst = []
 		for x in UniqPopList:
@@ -808,11 +686,7 @@ if len(OutputTable2) > 0:
 					for z in ClstStr:
 						if y[0] == z: Clst.append(int(str(UniqPopList.index(x)+1) + y[2]))
 		Clst.sort()
-		#print ( "Clst = " + str(Clst) )
 		ClstSize = len(Clst)
-		#print ( "ClstSize = " + str(ClstSize) )
-		#print ( "NumberOfPermutations = " + str(NumberOfPermutations) )
-
 
 		Clst1lettersList = []
 		Clst1lettersStr  = ""
@@ -835,15 +709,8 @@ if len(OutputTable2) > 0:
 			for x in CounterTotalRow: CounterPermuted1lettersList.append(str(x)[0])
 			CounterPermutedUniqSet = sorted(set(CounterPermuted1lettersList))
 			CounterPermuted1lettersStr = ''.join(sorted(set(CounterPermuted1lettersList)))
-			#print ( "CounterPermuted1lettersStr = " + str(CounterPermuted1lettersStr) )
-			#print ( "Clst1lettersStr = " + str(Clst1lettersStr) )
-			#print ( str(CounterPermuted1lettersStr) + "=" + str(Clst1lettersStr) )
 			if str(CounterPermuted1lettersStr) == str(Clst1lettersStr): CounterForTotalColumn.append(CounterTotalRow)
 
-		#print ( "CounterForTotalColumn = " + str(CounterForTotalColumn) )
-		#print ( "len(CounterForTotalColumn) = " + str(len(CounterForTotalColumn)) )
-		#print ( "CounterForClst = " + str(CounterForClst) )
-		#print ( "len(CounterForClst) = " + str(len(CounterForClst)) )
 
 		Cell      = len(ClstStrRowsPopCompositionMatch )
 		ColumnSum = len(ClstStrRowsTotal)
@@ -852,8 +719,6 @@ if len(OutputTable2) > 0:
 		CounterPermutedAllMatch  = len(CounterForClst)
 		CounterPermutedSizeMatch = len(CounterForTotalColumn)
 		ProportionPermuted = CounterPermutedSizeMatch / NumberOfPermutations
-
-		#print ( "ProportionPermuted = " + str(ProportionPermuted) )
 
 		if ProportionPermuted == 0:
 			Alpha = ProportionEmpirical
@@ -872,12 +737,11 @@ if len(OutputTable2) > 0:
 		OutputTable2[OutputTable2RowIndex].append(CounterPermutedAllMatch)
 		OutputTable2[OutputTable2RowIndex].append(CounterPermutedSizeMatch)
 		OutputTable2[OutputTable2RowIndex].append(Alpha)
-
 		OutputTable2RowIndex = OutputTable2RowIndex + 1
 
 ####################################################################
 #                                                                  #
-# Saving the ibdmig.out.affected file with p-val                   #
+# Saving the ibdmig.out.affected_clusters file with p-val          #
 #                                                                  #
 ####################################################################
 	TableHeader.append('P_perm')
@@ -890,12 +754,12 @@ if len(OutputTable2) > 0:
 	TableHeader.append('CounterPermutedSizeMatch')
 	TableHeader.append('Alpha')
 
-	with open("ibdmig.out.affected","w") as f:
+	with open("ibdmig.out.affected_clusters","w") as f:
 		f.write( '\t'.join(TableHeader) )
 		f.write( '\n' )
 		wr = csv.writer(f, delimiter="\t")
 		wr.writerows(OutputTable2)
-	log_file = ("p-values added to ibdmig.out.affected.\n")
+	log_file = ("p-values added to ibdmig.out.affected_clusters.\n")
 	with open("ibdmig.out.log", "a") as f: f.write(log_file)
 	print (log_file)
 
