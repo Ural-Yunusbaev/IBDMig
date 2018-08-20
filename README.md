@@ -14,6 +14,7 @@ ibdmig.list - the file containing a list of individuals with following columns: 
 mapfile - the map/bim file with genetic distances (not mandatory).<br>
 
 <pre>
+Table 1.
 POPS	4	5	6	7	8	9	10	11	12	13	14	15	16	17	20	TOTAL
 Bas	2958	870	227	91	38	13	7	3	0	0	1	0	0	0	0	4208
 Rus	3697	829	224	66	18	12	3	0	0	0	0	0	0	0	0	4849
@@ -26,21 +27,21 @@ TOTAL	57431	22620	10589	6211	3096	1911	984	416	195	94	46	12	3	1	1	103610
 </pre>
 Input files examples:<br>
 ibdmig.list - the list of individuals with following tab delimeted columns: ind_id, population, phenotype<br>
-head ibdmig.list<br>
-10BO	pop1	1<br>
-103B	pop1	1<br>
-9i	pop1	2<br>
-88N	pop1	2<br>
-9RE	pop2	1<br>
-98RE	pop2	1<br>
-103A	pop3	2<br>
-102N	pop3	2<br>
-101N	pop3	2<br>
-100N	pop3	2<br>
-
+<pre>
+head ibdmig.list
+10BO	pop1	1
+103B	pop1	1
+9i	pop1	2
+88N	pop1	2
+9RE	pop2	1
+98RE	pop2	1
+103A	pop3	2
+102N	pop3	2
+101N	pop3	2
+100N	pop3	2
 * - columns are folowing: individual ID, population, phenotype.<br>
 **- maximum number of different populations is 7.
-
+</pre>
 
 head -n 3 clust_1.hcl<br>
 c1	16504399	17593685	19N 19N.0	19N 19N.0	182A 182A.0	182A 182A.0	66i 66i.1	66i 66i.1	153A 153A.1	153A 153A.1<br>
