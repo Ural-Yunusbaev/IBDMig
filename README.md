@@ -117,3 +117,6 @@ max	-	-	-	6	4	4	3	2
 min	-	-	-	4	1	1	0	0
 mean	-	-	-	5	2	2	1	1
 </pre>
+
+References
+Gusev, A., Kenny, E. E., Lowe, J. K., Salit, J., Saxena, R., Kathiresan, S., … Pe’er, I. (2011). DASH: a method for identical-by-descent haplotype mapping uncovers association with recent variation. American Journal of Human Genetics, 88(6), 706–717.
