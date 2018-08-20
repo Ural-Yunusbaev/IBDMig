@@ -16,7 +16,7 @@ where:<br>
 ibdmig.list - the file containing a list of individuals with following columns: ind_id, population, phenotype;<br>
 mapfile - the map/bim file with genetic distances (not mandatory).<br>
 
-Output files:
+Output files examples:
 <pre>
 cat ibdmig.out.cluster_counts
 POPS	3	4	5	6	7	8	9	10	11	12	13	14	15	16	17	20	TOTAL
@@ -28,6 +28,11 @@ POPS	3	4	5	6	7	8	9	10	11	12	13	14	15	16	17	20	TOTAL
 011	0	15982	5757	2344	1190	472	273	108	29	11	6	2	1	0	0	0	26175
 111	0	15367	8784	5327	3640	2042	1342	745	346	158	74	39	11	2	1	1	37879
 </pre>
+The header of ibdmig.out.cluster_counts is following: <br>
+POPS - variants of population combinations;<br>
+4-16 - sizes of IBD clusters;<br>
+TOTAL - total number for row<br>
+Populations combinations in column 1 presented in the file ibdmig.out.cluster_header.<br>
 
 <pre>
 cat ibdmig.out.cluster_length
@@ -65,39 +70,20 @@ head -n 3 clust_1.hcl
 c1	16504399	17593685	19N 19N.0	19N 19N.0	182A 182A.0	182A 182A.0	66i 66i.1	66i 66i.1	153A 153A.1	153A 153A.1
 c2	16504399	17799529	62BB 62BB.0	62BB 62BB.0	55k 55k.0	55k 55k.0	190k 190k.0	190k 190k.0	51A 51A.1	51A 51A.1
 c3	16504399	17823261	164B 164B.0	164B 164B.0	38BO 38BO.1	38BO 38BO.1	36i 36i.1	36i 36i.1	100k 100k.1	100k 100k.1
-* - for details see http://www1.cs.columbia.edu/~gusev/dash/
 </pre>
+For details see http://www1.cs.columbia.edu/~gusev/dash/
 
+<pre>
 head -n 3 mapfile.bim<br>
 1       rs3094315       0.48877594      752566  G       A<br>
 1       rs12562034      0.49571378      768448  A       G<br>
 1       rs12124819      0.49944228      776546  G       A<br>
-* - for details see http://zzz.bwh.harvard.edu/plink/data.shtml#map
+</pre>
+For details see http://zzz.bwh.harvard.edu/plink/data.shtml#map
 
+Additional output files:
 
-Output files are following:<br>
-ibdmig.out.affected<br>
-ibdmig.out.proportion<br>
-ibdmig.out.total<br>
-
-Output files examples:
-
-cat ibdmig.out.proportion<br>
-POPS	4	5	6	7	8	9	10	11	15	16	TOTAL<br>
-100	1	1	0	0	0	0	0	0	0	0	2<br>
-010	1	1	1	0	0	0	0	0	0	0	3<br>
-001	1	0	0	0	0	0	0	0	0	0	1<br>
-110	1	1	1	0	0	0	0	0	0	0	3<br>
-101	1	1	1	0	0	0	0	0	0	0	3<br>
-011	1	1	1	0	1	0	0	0	0	0	4<br>
-111	1	1	1	1	1	1	1	1	1	1	10<br>
-
-* The header of ibdmig_proportion.out is following: <br>
-POPS - variants of population combinations;<br>
-4-16 - sizes of IBD clusters;<br>
-TOTAL - total number for row<br>
-** populations combinations in column 1 presented in the file ibdmig.out.proportion.header.<br>
-
+<pre>
 cat ibdmig.out.proportion.header<br>
 100	pop1<br>
 010	pop2<br>
@@ -106,15 +92,16 @@ cat ibdmig.out.proportion.header<br>
 101	pop1_pop3<br>
 011	pop2_pop3<br>
 111	pop1_pop2_pop3<br>
+</pre>
 
-
+<pre>
 head -n 4 ibdmig.out.total<br>
 CHR	CLASTER	START	END	SIZE	AFFECT	Pop1	Pop2	Pop3<br>
 1	c1	165043	175936	4	4	1	3	0<br>
 1	c2	165043	177995	6	2	4	0	2<br>
 1	c3	165043	178232	4	1	2	0	2<br>
-
-* - columns are folowing:<br>
+</pre>
+Columns are folowing:<br>
 Chromosome number<br>
 Cluster identifier<br>
 Cluster start position<br>
@@ -125,9 +112,10 @@ The number of individuals from Pop1<br>
 The number of individuals from Pop2<br>
 The number of individuals from Pop3<br>
 
+<pre>
 cat ibdmig.out.total.end<br>
 CHR	CLASTER	START	END	SIZE	AFFECT	Bas	Rus	Tat<br>
 max	-	-	-	6	4	4	3	2<br>
 min	-	-	-	4	1	1	0	0<br>
 mean	-	-	-	5	2	2	1	1<br>
-
+</pre>
