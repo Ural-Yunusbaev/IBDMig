@@ -1,7 +1,6 @@
 # IBDMig
 
-IBDMig is a Python tool to assess the admixture process in mixed cohort via IBD sharing in DASH (Gusev et al., 2011) generated IBD clusters. 
-IBDMig assesses IBD sharing between individuals of different ethnic origin. Thus it shows the haplotype contribution from one population to other.
+IBDMig is a Python tool to assess the admixture process in mixed cohort via IBD sharing. IBDMig assesses IBD sharing for individuals of different ethnic origin in DASH (Gusev et al., 2011) generated IBD clusters. Thus it shows the haplotype contribution from one population to other.
 
 ### Usage
 
