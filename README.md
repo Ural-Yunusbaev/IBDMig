@@ -1,19 +1,19 @@
 # IBDMig
 Admixture estimation in mixed population via IBD sharing
 
-By Ural Yunusbaev 2018
-
-IBDMig is a Python tool to assess the admixture process in mixed cohort via DASH (Gusev et al., 2011) generated IBD clusters. This tool uses  cluster size (number of the individuals sharing the haplotype), population label (source of the individuals carrying the haplotype) and genetic length (length of the haplotype individuals sharing) to generate following output files:<br>
-ibdmig.out.cluster_counts containing counts of clusters sorted by size and populations composition (see Output files examples);<br>
-ibdmig.out.cluster_length - the average length of haplotypes in each population and cluster size category as shown in the table above (see Output files examples).<br>
+IBDMig is a Python tool to assess the admixture process in mixed cohort via DASH (Gusev et al., 2011) generated IBD clusters. 
 IBDMig assesses IBD sharing between individuals of different ethnic origin. Thus it shows the haplotype contribution from one population to other.
 
-To start IBDMig type:
+### Usage
 <pre>./ibdmig.py 22 ibdmig.list mapfile</pre>
 where:<br>
 22 - the number of chromosomes in according to DUSH output files (clust_1.hcl ... clust_22.hcl);<br>
 ibdmig.list - the file containing a list of individuals with following columns: ind_id, population, phenotype;<br>
 mapfile - the map/bim file with genetic distances (not mandatory).<br>
+
+IBDMig generates following output files:<br>
+ibdmig.out.cluster_counts containing counts of clusters sorted by size and populations composition (see Output files examples);<br>
+ibdmig.out.cluster_length - the average length of haplotypes in each population and cluster size category as shown in the table above (see Output files examples).<br>
 
 Output files examples:
 <pre>
