@@ -5,8 +5,8 @@
 # IBD sharing. IBDMig uses IBD sharing for individuals of        #
 # different ethnic origin in DASH generated IBD clusters.        #
 # This script requires python-3.6.3                              #
-# To start type: ./ibdmig.py 22 ibdmig.list 9 6                  #
-# By Ural Yunusbaev 2018                                         #
+# To start type: ./ibdmig.py 22 ibdmig.list                      #
+# By Ural Yunusbaev 2018, uralub@gmail.com                       #
 ##################################################################
 
 # Read more in https://github.com/Ural-Yunusbaev/IBDMig/blob/master/README.md
