@@ -129,5 +129,13 @@ min	-	-	-	4	0	0	0	0	0	0	0
 mean	-	-	-	6.4	3.6	2.0	2.7	1.6	0.0	0.0	0.0
 </pre>
 
+### Contact
+Ural Yunusbaev<br>
+uralub@gmail.com<br>
+
+### Citing
+this tool was developed for<br>
+Ural Yunusbayev, Mait Metspalu, Bayazit Yunusbayev. (2018). Reconstructing recent population history while mapping rare variants.<br>
+
 ### References
 Gusev, A., Kenny, E. E., Lowe, J. K., Salit, J., Saxena, R., Kathiresan, S., … Pe’er, I. (2011). DASH: a method for identical-by-descent haplotype mapping uncovers association with recent variation. American Journal of Human Genetics, 88(6), 706–717.
