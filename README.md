@@ -15,7 +15,7 @@ IBDMig generates following output files:<br>
 ibdmig.out.cluster_counts - counts of clusters sorted by size and populations composition (see Output files examples);<br>
 ibdmig.out.cluster_length - average length of haplotypes for each population and cluster size category as shown in the table above (see Output files examples).<br>
 
-###Output files examples:
+### Output files examples
 <pre>
 cat ibdmig.out.cluster_counts
 POPS	3	4	5	6	7	8	9	10	11	12	13	14	15	16	17	20	TOTAL
@@ -54,7 +54,7 @@ POPS - populations combinations;<br>
 TOTAL - average for the row.<br>
 Populations combinations in column 1 presented in the file ibdmig.out.cluster_header.<br>
 
-###Input files examples:<br>
+### Input files examples
 
 <pre>
 head ibdmig.list
@@ -88,7 +88,7 @@ head -n 3 mapfile.bim
 </pre>
 For details see http://zzz.bwh.harvard.edu/plink/data.shtml#map
 
-###Additional output files:
+### Additional output files
 
 <pre>
 cat ibdmig.out.proportion.header
@@ -127,5 +127,5 @@ min	-	-	-	4	1	1	0	0
 mean	-	-	-	5	2	2	1	1
 </pre>
 
-###References<br>
+### References
 Gusev, A., Kenny, E. E., Lowe, J. K., Salit, J., Saxena, R., Kathiresan, S., … Pe’er, I. (2011). DASH: a method for identical-by-descent haplotype mapping uncovers association with recent variation. American Journal of Human Genetics, 88(6), 706–717.
