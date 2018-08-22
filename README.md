@@ -3,10 +3,9 @@ Admixture estimation in mixed population via IBD sharing
 
 By Ural Yunusbaev 2018
 
-IBDMig is a Python tool to assess the admixture process in mixed cohort via DASH (Gusev et al., 2011) generated IBD clusters. This tool uses  cluster size (number of the individuals sharing the haplotype), population label (source of the individuals carrying the haplotype) and genetic length to generate following output files:<br>
-ibdmig.out.cluster_counts containing counts of clusters sorted by size and population;<br>
-ibdmig.out.cluster_length - the average length of haplotypes in each population and cluster size category as shown in the table above.<br>
-The output files are tables where rows are populations combinations and columns are cluster sizes.<br>
+IBDMig is a Python tool to assess the admixture process in mixed cohort via DASH (Gusev et al., 2011) generated IBD clusters. This tool uses  cluster size (number of the individuals sharing the haplotype), population label (source of the individuals carrying the haplotype) and genetic length (length of the haplotype individuals sharing) to generate following output files:<br>
+ibdmig.out.cluster_counts containing counts of clusters sorted by size and populations composition (see Output files examples);<br>
+ibdmig.out.cluster_length - the average length of haplotypes in each population and cluster size category as shown in the table above (see Output files examples).<br>
 IBDMig assesses IBD sharing between individuals of different ethnic origin. Thus it shows the haplotype contribution from one population to other.
 
 To start IBDMig type:
@@ -28,10 +27,11 @@ POPS	3	4	5	6	7	8	9	10	11	12	13	14	15	16	17	20	TOTAL
 011	0	15982	5757	2344	1190	472	273	108	29	11	6	2	1	0	0	0	26175
 111	0	15367	8784	5327	3640	2042	1342	745	346	158	74	39	11	2	1	1	37879
 </pre>
+Rows are populations combinations and columns are cluster sizes.<br>
 The header of ibdmig.out.cluster_counts is following: <br>
-POPS - variants of population combinations;<br>
+POPS - populations combinations;<br>
 4-20 - sizes of clusters;<br>
-TOTAL - total number for row<br>
+TOTAL - total number for the row<br>
 Populations combinations in column 1 presented in the file ibdmig.out.cluster_header.<br>
 
 <pre>
