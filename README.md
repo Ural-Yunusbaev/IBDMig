@@ -1,11 +1,13 @@
 # IBDMig
+
 Admixture estimation in mixed population via IBD sharing
 
 IBDMig is a Python tool to assess the admixture process in mixed cohort via DASH (Gusev et al., 2011) generated IBD clusters. 
 IBDMig assesses IBD sharing between individuals of different ethnic origin. Thus it shows the haplotype contribution from one population to other.
 
 ### Usage
-<pre>./ibdmig.py 22 ibdmig.list mapfile</pre>
+
+<pre>./ibdmig.py 22 ibdmig.list mapfile.bim</pre>
 where:<br>
 22 - the number of chromosomes in according to DUSH output files (clust_1.hcl ... clust_22.hcl);<br>
 ibdmig.list - the file containing a list of individuals;<br>
@@ -16,6 +18,7 @@ ibdmig.out.cluster_counts - counts of clusters sorted by size and populations co
 ibdmig.out.cluster_length - average length of haplotypes for each population and cluster size category as shown in the table above (see Output files examples).<br>
 
 ### Output files examples
+
 <pre>
 cat ibdmig.out.cluster_counts
 POPS	3	4	5	6	7	8	9	10	11	12	13	14	15	16	17	20	TOTAL
@@ -91,7 +94,7 @@ For details see http://zzz.bwh.harvard.edu/plink/data.shtml#map
 ### Additional output files
 
 <pre>
-cat ibdmig.out.proportion.header
+cat ibdmig.out.cluster_header
 100    pop1
 010    pop2
 001    pop3
@@ -102,11 +105,12 @@ cat ibdmig.out.proportion.header
 </pre>
 
 <pre>
-head -n 4 ibdmig.out.total
-CHR	CLUSTER	START	END	SIZE	AFFECT	Pop1	Pop2	Pop3
-1	c1	165043	175936	4	4	1	3	0
-1	c2	165043	177995	6	2	4	0	2
-1	c3	165043	178232	4	1	2	0	2
+head -n 4 ibdmig.out.cluster_list
+CHR	CLUSTER	START	END	SIZE	AFFECT	Pop1	Pop2	Pop3	LENGTH_cM	START_cM	END_cM
+1	c1	1152631	2996602	5	3	0	3	2	0.0	0.0	0.0
+1	c2	1310924	3147030	4	0	3	0	1	0.0	0.0	0.0
+1	c3	1493727	2754512	4	1	0	2	2	0.0	0.0	0.0
+1	c4	1462766	3127137	6	2	4	0	2	0.0	0.0	0.0
 </pre>
 Columns are folowing:<br>
 Chromosome number;<br>
@@ -118,13 +122,14 @@ The number of affected individuals;<br>
 The number of individuals from Pop1;<br>
 The number of individuals from Pop2;<br>
 The number of individuals from Pop3;<br>
+Genetic length in centimorgans.<br>
 
 <pre>
-cat ibdmig.out.total.end<br>
-CHR	CLUSTER	START	END	SIZE	AFFECT	Bas	Rus	Tat
-max	-	-	-	6	4	4	3	2
-min	-	-	-	4	1	1	0	0
-mean	-	-	-	5	2	2	1	1
+cat ibdmig.out.cluster_list.end
+CHR	CLUSTER	START	END	SIZE	AFFECT	Pop1	Pop2	Pop3	LENGTH_cM	START_cM	END_cM
+max	-	-	-	15	9	6	8	6	0	0	0
+min	-	-	-	4	0	0	0	0	0	0	0
+mean	-	-	-	6.4	3.6	2.0	2.7	1.6	0.0	0.0	0.0
 </pre>
 
 ### References
