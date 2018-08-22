@@ -1,5 +1,5 @@
 # IBDMig
-Python tool for IBD clusters admixture estimation
+Admixture estimation in mixed population via IBD sharing
 
 By Ural Yunusbaev 2018
 
