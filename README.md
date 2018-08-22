@@ -27,7 +27,7 @@ POPS	3	4	5	6	7	8	9	10	11	12	13	14	15	16	17	20	TOTAL
 011	0	15982	5757	2344	1190	472	273	108	29	11	6	2	1	0	0	0	26175
 111	0	15367	8784	5327	3640	2042	1342	745	346	158	74	39	11	2	1	1	37879
 </pre>
-Counts of clusters for populations combinations and clusters sizes category.<br>
+Counts of clusters for populations combination and cluster size categories.<br>
 Rows are populations combinations, and columns are clusters sizes.<br>
 The header of ibdmig.out.cluster_counts is following: <br>
 POPS - populations combinations;<br>
@@ -46,7 +46,7 @@ POPS	4	5	6	7	8	9	10	11	12	13	14	15	16	17	20	TOTAL
 011	2.6	2.4	2.3	2.2	2.2	2.1	2.0	2.1	2.0	2.0	2.3	2.0				2.5
 111	2.6	2.5	2.4	2.3	2.3	2.1	2.2	2.1	2.0	2.1	2.0	1.8	2.1	2.0	2.1	2.5
 </pre>
-Average length of haplotypes for populations combinations and clusters sizes category.<br>
+Average length of haplotypes for populations combination and cluster size categories.<br>
 Rows are populations combinations, and columns are clusters sizes.<br>
 The header of ibdmig.out.cluster_counts is following: <br>
 POPS - populations combinations;<br>
@@ -114,7 +114,7 @@ Cluster identifier;<br>
 Cluster start position;<br>
 Cluster end position;<br>
 Cluster size;<br>
-The number of affected individuals;<br>
+The number of affected individuals (patients);<br>
 The number of individuals from Pop1;<br>
 The number of individuals from Pop2;<br>
 The number of individuals from Pop3;<br>
