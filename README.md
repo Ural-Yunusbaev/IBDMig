@@ -46,7 +46,7 @@ POPS	4	5	6	7	8	9	10	11	12	13	14	15	16	17	20	TOTAL
 011	2.6	2.4	2.3	2.2	2.2	2.1	2.0	2.1	2.0	2.0	2.3	2.0				2.5
 111	2.6	2.5	2.4	2.3	2.3	2.1	2.2	2.1	2.0	2.1	2.0	1.8	2.1	2.0	2.1	2.5
 </pre>
-Average length of haplotypes for populations combination and cluster size categories.<br>
+The average length of haplotypes for populations combination and cluster size categories.<br>
 Rows are populations combinations, and columns are clusters sizes.<br>
 The header of ibdmig.out.cluster_counts is following: <br>
 POPS - populations combinations;<br>
@@ -80,8 +80,8 @@ head ibdmig.list
 101N	pop3	2
 100N	pop3	2
 </pre>
-Columns: inddividual ID, population, phenotype.<br>
-Maximum number of source populations is 7.
+Columns: individual ID, source population, phenotype.<br>
+The maximum number of source populations is 7.
 
 <pre>
 head -n 3 clust_1.hcl
