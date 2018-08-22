@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
 
 ##################################################################
-# This script calculates different ethnic origin haplotypes      #
-# proportions within IBD clusters. Then, it finds polyethinc and #
-# monoethnic IBD clusters enriched with affected haplotypes.     #
+# IBDMig assess the admixture process in mixed cohort via        #
+# IBD sharing. IBDMig uses IBD sharing for individuals of        #
+# different ethnic origin in DASH generated IBD clusters.        #
 # This script requires python-3.6.3                              #
 # To start type: ./ibdmig.py 22 ibdmig.list 9 6                  #
-# Read more in ibdmig.readme                                     #
 # By Ural Yunusbaev 2018                                         #
 ##################################################################
+
+# Read more in https://github.com/Ural-Yunusbaev/IBDMig/blob/master/README.md
 
 # module load python-3.6.3
 
@@ -33,7 +34,7 @@ if   sys.argv[4:]: poly_threshold  = sys.argv[4]
 if   sys.argv[5:]: mono_threshold  = sys.argv[5]
 if file_hcl == "Missing file_hcl" or file_list == "Missing file_list":
 	print ("Missing command line argument.")
-	sys.exit("To start type: ./ibdmig.py 22 ibdmig.list\nwhere:\n22 - the number of chromosomes in acording to DUSH output files (clust_1.hcl ... clust_22.hcl)\nibdmig.list - the file containing a list of individuals with following columns: ind_id, population, phenotype\nmapfile - the map/bim file with genetic distances (not mandatory)\n9  - the size threshold for affected polyethnic cluster (not mandatory, 9 if not defined)\n6  - the size threshold for affected monoethnic cluster (not mandatory, 6 if not defined)\nRead more in ibdmig.readme")
+	sys.exit("To start type: ./ibdmig.py 22 ibdmig.list\nwhere:\n22 - the number of chromosomes in according to number of DASH output files (clust_1.hcl ... clust_22.hcl)\nibdmig.list - the file containing a list of individuals with following columns: ind_id, population, phenotype\nmapfile - the map/bim file with genetic distances (not mandatory)\n9  - the size threshold for affected polyethnic cluster (not mandatory, 9 if not defined)\n6  - the size threshold for affected monoethnic cluster (not mandatory, 6 if not defined)\nRead more in https://github.com/Ural-Yunusbaev/IBDMig/blob/master/README.md")
 
 if file_map == "Missing file_map":
 	print ("Missing file_map argument in command line. Genetic distances in output will be 0.")
@@ -83,7 +84,7 @@ for i in range(len(IndPopList)):
 	for k in  range(len(UniqPopList)):
 		if IndPopList[i][1] == list(UniqPopList)[k]:
 			UniqPopListNumber[k][1] += 1
-#print (UniqPopListNumber)
+
 n=0
 for i in range(len(UniqPopListNumber)): 
 	n=n+1
@@ -118,7 +119,6 @@ with open("ibdmig.out.log", "a") as f: f.write(log_file)
 
 GenDists1col = []
 for i in GenDists:
-#	print ( str(i[0]) + ":" + str(i[3]) )
 	i1 =  ( str(i[0]) + ":" + str(i[3]) )
 	GenDists1col.append(i1)
 
@@ -423,18 +423,10 @@ for x in PopCombinations:
 		string2 = str(x) + str(y)
 		index1 = (PopCombinationsTableInd.index(string2))
 		string2 = PopCombinationsTable[index1][3]
-		#print("string2 = " + str(string2))
 		string2total_for_row = string2total_for_row + int(string2)
 		OutputTable4.append(string2)
 	OutputTable4.append(string2total_for_row)
-	#print("string2total_for_row")
-	#print(string2total_for_row)
 	OutputTable40.append(OutputTable4)
-	#print("OutputTable4")
-	#print(OutputTable4)
-
-#print("OutputTable40")
-#print(OutputTable40)
 
 OutputTable40head = ['POPS']
 for x in OutputTable3: OutputTable40head.append(str(x))
@@ -581,15 +573,6 @@ print (log_file)
 #                                            #
 ##############################################
 
-#print ( "OutputTable2 =" )
-#for aa in OutputTable2: print ( aa )
-
-#print ( "clusters =" )
-#for bb in clusters: print ( bb )
-
-#print ( "OutputTable =" )
-#for cc in OutputTable: print ( cc )
-
 if len(OutputTable2) > 0:
 	Dataset = []
 	for x in UniqPopList:
@@ -597,7 +580,6 @@ if len(OutputTable2) > 0:
 			if y[1] == x:
 				Dataset.append(int(str(UniqPopList.index(x)+1) + y[2]))
 
-	#print ( "Dataset = " + str(Dataset) )
 	NumberOfPermutations = 100000
 	P_perm = 1
 	P_corr = 1
@@ -613,35 +595,26 @@ if len(OutputTable2) > 0:
 				for y in range(len(x)):
 					if y > 3: ClstStr.append(x[y])
 		ClstStr.sort()
-		#print ( "ClstStr = " + str(ClstStr) )
 
 		ClstStrRow = []
 		for x in OutputTable:
 			if x[0] == ChromNum and x[1] == ClstrNum:
 				ClstStrRow = x
-		#print ( "ClstStrRow = " + str(ClstStrRow) )
-
 
 		ClstStrRowsTotal = []
 		for x in OutputTable:
 			if x[4] == ClstStrRow[4]:
 				ClstStrRowsTotal.append(x)
-		#print ( "ClstStrRowsTotal = " + str(ClstStrRowsTotal) )
-		#print ( "len(ClstStrRowsTotal) = " + str(len(ClstStrRowsTotal)) )
 
 		ClstStrRowsExactMatch45Columns = []
 		for x in OutputTable:
 			if x[4] == ClstStrRow[4] and x[5] == ClstStrRow[5]:
 				ClstStrRowsExactMatch45Columns.append(x)
-		#print ( "ClstStrRowsExactMatch45Columns = " + str(ClstStrRowsExactMatch45Columns) )
-		#print ( "len(ClstStrRowsExactMatch45Columns) = " + str(len(ClstStrRowsExactMatch45Columns)) )
 
 		ClstStrRowInds = []
 		for x in range(len(ClstStrRow)):
 			if int(x) > 3: 
 				ClstStrRowInds.append(x)
-		#print ( "ClstStrRowInds = " + str(ClstStrRowInds) )
-
 
 		ClstStrRowsExactMatchAllColumns = []
 		for x in ClstStrRowsTotal:
@@ -651,9 +624,6 @@ if len(OutputTable2) > 0:
 					x_match = 0
 			if x_match == 1:
 				ClstStrRowsExactMatchAllColumns.append(x)
-
-		#print ( "ClstStrRowsExactMatchAllColumns = " + str(ClstStrRowsExactMatchAllColumns) )
-		#print ( "len(ClstStrRowsExactMatchAllColumns) = " + str(len(ClstStrRowsExactMatchAllColumns)) )
 
 
 		ClstStrRowPopsStr = ""
@@ -693,8 +663,6 @@ if len(OutputTable2) > 0:
 		for x in Clst: Clst1lettersList.append(str(x)[0])
 		ClstUniqSet = sorted(set(Clst1lettersList))
 		Clst1lettersStr = ''.join(sorted(set(Clst1lettersList)))
-		#print ( "Clst1lettersStr = " + str(Clst1lettersStr) )
-
 
 		CounterForClst = []
 		CounterForTotalColumn = []
