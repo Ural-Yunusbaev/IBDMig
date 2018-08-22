@@ -8,12 +8,12 @@ IBDMig assesses IBD sharing between individuals of different ethnic origin. Thus
 <pre>./ibdmig.py 22 ibdmig.list mapfile</pre>
 where:<br>
 22 - the number of chromosomes in according to DUSH output files (clust_1.hcl ... clust_22.hcl);<br>
-ibdmig.list - the file containing a list of individuals with following columns: ind_id, population, phenotype;<br>
+ibdmig.list - the file containing a list of individuals;<br>
 mapfile - the map/bim file with genetic distances (not mandatory).<br>
 
 IBDMig generates following output files:<br>
-ibdmig.out.cluster_counts containing counts of clusters sorted by size and populations composition (see Output files examples);<br>
-ibdmig.out.cluster_length - the average length of haplotypes in each population and cluster size category as shown in the table above (see Output files examples).<br>
+ibdmig.out.cluster_counts - counts of clusters sorted by size and populations composition (see Output files examples);<br>
+ibdmig.out.cluster_length - average length of haplotypes for each population and cluster size category as shown in the table above (see Output files examples).<br>
 
 Output files examples:
 <pre>
@@ -27,6 +27,7 @@ POPS	3	4	5	6	7	8	9	10	11	12	13	14	15	16	17	20	TOTAL
 011	0	15982	5757	2344	1190	472	273	108	29	11	6	2	1	0	0	0	26175
 111	0	15367	8784	5327	3640	2042	1342	745	346	158	74	39	11	2	1	1	37879
 </pre>
+Counts of clusters sorted by size and populations composition.<br>
 Rows are populations combinations and columns are cluster sizes.<br>
 The header of ibdmig.out.cluster_counts is following: <br>
 POPS - populations combinations;<br>
@@ -45,22 +46,30 @@ POPS	4	5	6	7	8	9	10	11	12	13	14	15	16	17	20	TOTAL
 011	2.6	2.4	2.3	2.2	2.2	2.1	2.0	2.1	2.0	2.0	2.3	2.0				2.5
 111	2.6	2.5	2.4	2.3	2.3	2.1	2.2	2.1	2.0	2.1	2.0	1.8	2.1	2.0	2.1	2.5
 </pre>
+Average length of haplotypes for each population and cluster size category.<br>
+Rows are populations combinations and columns are cluster sizes.<br>
+The header of ibdmig.out.cluster_counts is following: <br>
+POPS - populations combinations;<br>
+4-20 - sizes of clusters;<br>
+TOTAL - average for the row.<br>
+Populations combinations in column 1 presented in the file ibdmig.out.cluster_header.<br>
 
 Input files examples:<br>
 ibdmig.list - the list of individuals with following tab delimeted columns: ind_id, population, phenotype<br>
 <pre>
 head ibdmig.list
-10BO    pop1    1
-103B    pop1    1
-9i    pop1    2
-88N    pop1    2
-9RE    pop2    1
-98RE    pop2    1
-103A    pop3    2
-102N    pop3    2
-101N    pop3    2
-100N    pop3    2
+10BO	pop1	1
+103B	pop1	1
+9i	pop1	2
+88N	pop1	2
+9RE	pop2	1
+98RE	pop2	1
+103A	pop3	2
+102N	pop3	2
+101N	pop3	2
+100N	pop3	2
 </pre>
+Columns: inddividual ID, population, phenotype
 Maximum number of source populations is 7.
 
 <pre>
@@ -72,10 +81,10 @@ c3    16504399    17823261    164B 164B.0    164B 164B.0    38BO 38BO.1    38BO 
 For details see http://www1.cs.columbia.edu/~gusev/dash/
 
 <pre>
-head -n 3 mapfile.bim<br>
-1       rs3094315       0.48877594      752566  G       A<br>
-1       rs12562034      0.49571378      768448  A       G<br>
-1       rs12124819      0.49944228      776546  G       A<br>
+head -n 3 mapfile.bim
+1       rs3094315       0.48877594      752566  G       A
+1       rs12562034      0.49571378      768448  A       G
+1       rs12124819      0.49944228      776546  G       A
 </pre>
 For details see http://zzz.bwh.harvard.edu/plink/data.shtml#map
 
@@ -94,10 +103,10 @@ cat ibdmig.out.proportion.header
 
 <pre>
 head -n 4 ibdmig.out.total
-CHR    CLUSTER    START    END    SIZE    AFFECT    Pop1    Pop2    Pop3
-1    c1    165043    175936    4    4    1    3    0
-1    c2    165043    177995    6    2    4    0    2
-1    c3    165043    178232    4    1    2    0    2
+CHR	CLUSTER	START	END	SIZE	AFFECT	Pop1	Pop2	Pop3
+1	c1	165043	175936	4	4	1	3	0
+1	c2	165043	177995	6	2	4	0	2
+1	c3	165043	178232	4	1	2	0	2
 </pre>
 Columns are folowing:<br>
 Chromosome number<br>
@@ -112,10 +121,10 @@ The number of individuals from Pop3<br>
 
 <pre>
 cat ibdmig.out.total.end<br>
-CHR    CLUSTER    START    END    SIZE    AFFECT    Bas    Rus    Tat
-max    -    -    -    6    4    4    3    2
-min    -    -    -    4    1    1    0    0
-mean    -    -    -    5    2    2    1    1
+CHR	CLUSTER	START	END	SIZE	AFFECT	Bas	Rus	Tat
+max	-	-	-	6	4	4	3	2
+min	-	-	-	4	1	1	0	0
+mean	-	-	-	5	2	2	1	1
 </pre>
 
 References<br>
