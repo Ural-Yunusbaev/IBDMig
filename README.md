@@ -1,18 +1,18 @@
 # IBDMig
 
-IBDMig is a Python tool to assess the admixture process in mixed cohort via IBD sharing. IBDMig assesses IBD sharing for individuals of different ethnic origin in DASH (Gusev et al., 2011) generated IBD clusters. Thus it shows the haplotype contribution from one population to other.
+IBDMig is a Python3 tool to assess the admixture process in mixed cohort via IBD sharing. IBDMig assesses IBD sharing for individuals of different ethnic origin in DASH (Gusev et al., 2011) generated IBD clusters. Thus it shows the haplotype contribution from one population to other.
 
 ### Usage
 
 <pre>./ibdmig.py 22 ibdmig.list mapfile.bim</pre>
 where:<br>
-22 - the number of chromosomes in according to DUSH output files (clust_1.hcl ... clust_22.hcl);<br>
+22 - the number of chromosomes in according to number of DASH output files (clust_1.hcl ... clust_22.hcl);<br>
 ibdmig.list - the file containing a list of individuals;<br>
 mapfile - the map/bim file with genetic distances (not mandatory).<br>
 
 IBDMig generates following output files:<br>
-ibdmig.out.cluster_counts - counts of clusters sorted by size and populations composition (see Output files examples);<br>
-ibdmig.out.cluster_length - average length of haplotypes for each population and cluster size category as shown in the table above (see Output files examples).<br>
+ibdmig.out.cluster_counts - counts of clusters for each populations combinations and cluster size category (see Output files examples);<br>
+ibdmig.out.cluster_length - average length of haplotypes for each populations combinations and cluster size category (see Output files examples).<br>
 
 ### Output files examples
 
@@ -27,8 +27,8 @@ POPS	3	4	5	6	7	8	9	10	11	12	13	14	15	16	17	20	TOTAL
 011	0	15982	5757	2344	1190	472	273	108	29	11	6	2	1	0	0	0	26175
 111	0	15367	8784	5327	3640	2042	1342	745	346	158	74	39	11	2	1	1	37879
 </pre>
-Counts of clusters sorted by size and populations composition.<br>
-Rows are populations combinations and columns are cluster sizes.<br>
+Counts of clusters for populations combinations and cluster size category.<br>
+Rows are populations combinations and columns are clusters sizes.<br>
 The header of ibdmig.out.cluster_counts is following: <br>
 POPS - populations combinations;<br>
 4-20 - sizes of clusters;<br>
@@ -46,8 +46,8 @@ POPS	4	5	6	7	8	9	10	11	12	13	14	15	16	17	20	TOTAL
 011	2.6	2.4	2.3	2.2	2.2	2.1	2.0	2.1	2.0	2.0	2.3	2.0				2.5
 111	2.6	2.5	2.4	2.3	2.3	2.1	2.2	2.1	2.0	2.1	2.0	1.8	2.1	2.0	2.1	2.5
 </pre>
-Average length of haplotypes for each population and cluster size category.<br>
-Rows are populations combinations and columns are cluster sizes.<br>
+Average length of haplotypes for population combinations and cluster size category.<br>
+Rows are populations combinations and columns are clusters sizes.<br>
 The header of ibdmig.out.cluster_counts is following: <br>
 POPS - populations combinations;<br>
 4-20 - sizes of clusters;<br>
