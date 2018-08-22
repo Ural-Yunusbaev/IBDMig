@@ -9,6 +9,8 @@ where:<br>
 22 - the number of chromosomes in according to number of DASH output files (clust_1.hcl ... clust_22.hcl);<br>
 ibdmig.list - the file containing a list of individuals;<br>
 mapfile.bim - the map/bim file with genetic distances (not mandatory).<br>
+9  - the size threshold for affected polyethnic cluster (not mandatory, 9 if not defined)<br>
+6  - the size threshold for affected monoethnic cluster (not mandatory, 6 if not defined)<br>
 
 IBDMig generates the following output files:<br>
 ibdmig.out.cluster_counts - counts of clusters for each populations combinations and cluster size category (see Output files examples);<br>
