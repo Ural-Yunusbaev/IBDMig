@@ -119,7 +119,8 @@ The number of individuals from Pop1;<br>
 The number of individuals from Pop2;<br>
 The number of individuals from Pop3;<br>
 Genetic length in centimorgans.<br>
-
+Genetic distanse for start position in centimorgans.<br>
+Genetic distanse for end position in centimorgans.<br>
 <pre>
 cat ibdmig.out.cluster_list.end
 CHR	CLUSTER	START	END	SIZE	AFFECT	Pop1	Pop2	Pop3	LENGTH_cM	START_cM	END_cM
