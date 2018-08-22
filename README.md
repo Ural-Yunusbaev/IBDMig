@@ -8,7 +8,7 @@ IBDMig is a Python3 tool to assess the admixture process in mixed cohort via IBD
 where:<br>
 22 - the number of chromosomes in according to number of DASH output files (clust_1.hcl ... clust_22.hcl);<br>
 ibdmig.list - the file containing a list of individuals;<br>
-mapfile - the map/bim file with genetic distances (not mandatory).<br>
+mapfile.bim - the map/bim file with genetic distances (not mandatory).<br>
 
 IBDMig generates following output files:<br>
 ibdmig.out.cluster_counts - counts of clusters for each populations combinations and cluster size category (see Output files examples);<br>
@@ -54,6 +54,17 @@ POPS - populations combinations;<br>
 TOTAL - average for the row.<br>
 Populations combinations in column 1 presented in the file ibdmig.out.cluster_header.<br>
 
+<pre>
+cat ibdmig.out.cluster_header
+100    pop1
+010    pop2
+001    pop3
+110    pop1_pop2
+101    pop1_pop3
+011    pop2_pop3
+111    pop1_pop2_pop3
+</pre>
+
 ### Input files examples
 
 <pre>
@@ -91,23 +102,11 @@ For details see http://zzz.bwh.harvard.edu/plink/data.shtml#map
 ### Additional output files
 
 <pre>
-cat ibdmig.out.cluster_header
-100    pop1
-010    pop2
-001    pop3
-110    pop1_pop2
-101    pop1_pop3
-011    pop2_pop3
-111    pop1_pop2_pop3
-</pre>
-
-<pre>
 head -n 4 ibdmig.out.cluster_list
 CHR	CLUSTER	START	END	SIZE	AFFECT	Pop1	Pop2	Pop3	LENGTH_cM	START_cM	END_cM
 1	c1	1152631	2996602	5	3	0	3	2	0.0	0.0	0.0
 1	c2	1310924	3147030	4	0	3	0	1	0.0	0.0	0.0
 1	c3	1493727	2754512	4	1	0	2	2	0.0	0.0	0.0
-1	c4	1462766	3127137	6	2	4	0	2	0.0	0.0	0.0
 </pre>
 Columns are folowing:<br>
 Chromosome number;<br>
