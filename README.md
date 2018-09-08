@@ -137,8 +137,8 @@ Ural Yunusbaev<br>
 uralub@gmail.com<br>
 
 ### Citing
-this tool was developed for<br>
-Ural Yunusbayev, Albert Valeev, Milyausha Yunusbaeva, Mait Metspalu, Bayazit Yunusbayev. (2018). Reconstructing recent population history while mapping rare variants.<br>
+This tool was developed for<br>
+Ural Yunusbayev, Albert Valeev, Milyausha Yunusbaeva, Reedik Mägi, Mait Metspalu, Bayazit Yunusbayev. (2018). Reconstructing recent population history while mapping rare variants using haplotypes.<br>
 
 ### References
 Gusev, A., Kenny, E. E., Lowe, J. K., Salit, J., Saxena, R., Kathiresan, S., Altshuler, D., Friedman, J., Breslow, J., Pe’er, I. (2011). DASH: a method for identical-by-descent haplotype mapping uncovers association with recent variation. American Journal of Human Genetics, 88(6), 706–717.
